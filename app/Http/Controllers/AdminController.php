@@ -21,12 +21,12 @@ class AdminController extends Controller
     public function brands()
     {
         $brands = Brand::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.brands', compact('brands'));
+        return view('admin.v_brands.brands', compact('brands'));
     }
 
     public function add_brand()
     {
-        return view('admin.brand-add');
+        return view('admin.v_brands.brand-add');
     }
 
     public function brand_store(Request $request)
@@ -52,7 +52,7 @@ class AdminController extends Controller
     public function brand_edit($id)
     {
         $brand = Brand::find($id);
-        return view('admin.brand-edit', compact('brand'));
+        return view('admin.v_brands.brand-edit', compact('brand'));
     }
 
     public function brand_update(Request $request)
@@ -107,12 +107,12 @@ class AdminController extends Controller
     public function categories()
     {
         $categories = Category::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.categories', compact('categories'));
+        return view('admin.v_categories.categories', compact('categories'));
     }
 
     public function category_add()
     {
-        return view('admin.category-add');
+        return view('admin.v_categories.category-add');
     }
 
     public function category_store(Request $request)
