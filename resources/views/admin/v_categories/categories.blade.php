@@ -74,7 +74,8 @@
                                                         <i class="icon-edit-3"></i>
                                                     </div>
                                                 </a>
-                                                <form action="{{ route('admin.category.delete', ['id' => $category->id]) }}"
+                                                <form
+                                                    action="{{ route('admin.category.delete', ['id' => $category->id]) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

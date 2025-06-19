@@ -32,9 +32,13 @@
                             </div>
                         </form>
                     </div>
-                    <a class="tf-button style-1 w208" href="add-product.html"><i class="icon-plus"></i>Add new</a>
+                    <a class="tf-button style-1 w208" href="{{ route('admin.product.add') }}"><i class="icon-plus"></i>Add
+                        new</a>
                 </div>
                 <div class="table-responsive">
+                    @if (Session::has('status'))
+                        <p class="alert alert-success">{{ Session::get('status') }}</p>
+                    @endif
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -65,8 +69,8 @@
                                             <div class="text-tiny mt-3">{{ $product->slug }}</div>
                                         </div>
                                     </td>
-                                    <td>{{ $product->regular_price }}</td>
-                                    <td>{{ $product->sale_price }}</td>
+                                    <td>Rp. {{ number_format($product->regular_price) }}</td>
+                                    <td>Rp. {{ number_format($product->sale_price) }}</td>
                                     <td>{{ $product->SKU }}</td>
                                     <td>{{ $product->category->name }}</td>
                                     <td>{{ $product->brand->name }}</td>
@@ -100,7 +104,7 @@
 
                 <div class="divider"></div>
                 <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                    {{ $products->links('paginate::bootstrap-5') }}
+                    {{ $products->links('pagination::bootstrap-5') }}
 
                 </div>
             </div>

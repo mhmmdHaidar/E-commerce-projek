@@ -88,7 +88,8 @@
             </div>
         </div>
     </div>
-    @endsection @push('scripts')
+@endsection
+@push('scripts')
     <script>
         $(function() {
             $("#myFile").on("change", function(e) {
