@@ -42,25 +42,25 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>SalePrice</th>
-                                <th>SKU</th>
-                                <th>Category</th>
-                                <th>Brand</th>
-                                <th>Featured</th>
-                                <th>Stock</th>
-                                <th>Quantity</th>
-                                <th>Action</th>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">SalePrice</th>
+                                <th class="text-center">SKU</th>
+                                <th class="text-center">Category</th>
+                                <th class="text-center">Brand</th>
+                                <th class="text-center">Featured</th>
+                                <th class="text-center">Stock</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="pname">
-                                        <div class="image">
+                                        <div class="image ">
                                             <img src="{{ asset('uploads/products/thumbnails') }}/{{ $product->image }}"
                                                 alt="{{ $product->name }}" class="image">
                                         </div>
@@ -69,22 +69,22 @@
                                             <div class="text-tiny mt-3">{{ $product->slug }}</div>
                                         </div>
                                     </td>
-                                    <td>Rp. {{ number_format($product->regular_price) }}</td>
-                                    <td>Rp. {{ number_format($product->sale_price) }}</td>
-                                    <td>{{ $product->SKU }}</td>
-                                    <td>{{ $product->category->name }}</td>
-                                    <td>{{ $product->brand->name }}</td>
-                                    <td>{{ $product->featured == 0 ? 'No' : 'Yes' }}</td>
-                                    <td>{{ $product->stock_status }}</td>
-                                    <td>{{ $product->quantity }}</td>
-                                    <td>
+                                    <td class="text-center">Rp. {{ number_format($product->regular_price) }}</td>
+                                    <td class="text-center">Rp. {{ number_format($product->sale_price) }}</td>
+                                    <td class="text-center">{{ $product->SKU }}</td>
+                                    <td class="text-center">{{ $product->category->name }}</td>
+                                    <td class="text-center">{{ $product->brand->name }}</td>
+                                    <td class="text-center">{{ $product->featured == 0 ? 'No' : 'Yes' }}</td>
+                                    <td class="text-center">{{ $product->stock_status }}</td>
+                                    <td class="text-center">{{ $product->quantity }}</td>
+                                    <td class="text-center">
                                         <div class="list-icon-function">
                                             <a href="#" target="_blank">
                                                 <div class="item eye">
                                                     <i class="icon-eye"></i>
                                                 </div>
                                             </a>
-                                            <a href="#">
+                                            <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}">
                                                 <div class="item edit">
                                                     <i class="icon-edit-3"></i>
                                                 </div>
