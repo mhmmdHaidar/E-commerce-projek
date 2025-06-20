@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('font/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('icon/style.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon" />
     <link rel="apple-touch-icon-precomposed" href="{{ asset('images/favicon.') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
@@ -41,9 +41,9 @@
                     <div class="box-logo">
                         <a href="{{ route('admin.index') }}" id="site-logo-inner">
                             <img class="" id="logo_header_1" alt=""
-                                src="{{ asset('images/logo/logo.png') }}"
-                                data-light="{{ asset('images/logo/logo.png') }}"
-                                data-dark="{{ asset('images/logo/logo.png') }}">
+                                src="{{ asset('assets/images/logo.png') }}"
+                                data-light="{{ asset('assets/images/logo.png') }}"
+                                data-dark="{{ asset('assets/images/logo.png') }}">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
