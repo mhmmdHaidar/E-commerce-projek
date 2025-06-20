@@ -27,8 +27,8 @@ Route::middleware(['auth'])->group(function () {
 
    Route::put('/cart/update/{rowId}', [CartController::class, 'update_cart_quantity'])->name('cart.qty.update');
 
-
-   Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+   Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
+   Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 });
 
 Route::middleware(['auth'])->group(function () {
