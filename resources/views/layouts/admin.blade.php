@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>PeakDeals</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="e-commerce" />
@@ -43,7 +43,7 @@
                             <img class="" id="logo_header_1" alt=""
                                 src="{{ asset('assets/images/logo.png') }}"
                                 data-light="{{ asset('assets/images/logo.png') }}"
-                                data-dark="{{ asset('assets/images/logo.png') }}">
+                                data-dark="{{ asset('assets/images/logo.png') }}" width="100px">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
