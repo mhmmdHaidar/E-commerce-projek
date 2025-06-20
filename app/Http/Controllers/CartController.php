@@ -24,4 +24,20 @@ class CartController extends Controller
         )->associate('App\Models\Product');
         return redirect()->back();
     }
+
+    public function update_cart_quantity(Request $request, $rowId)
+    {
+        $product = Cart::instance('cart')->get($rowId);
+        $qty = $product->qty;
+
+        if ($request->action === 'increase') {
+            $qty += 1;
+        } elseif ($request->action === 'decrease' && $qty > 1) {
+            $qty -= 1;
+        }
+
+        Cart::instance('cart')->update($rowId, $qty);
+
+        return redirect()->back();
+    }
 }

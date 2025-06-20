@@ -21,8 +21,13 @@ Route::get('/shop/{product_slug}', [ShopController::class, 'product_details'])->
 Route::middleware(['auth'])->group(function () {
    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
    Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
-   Route::patch('/cart/update/{rowId}', [CartController::class, 'update'])->name('cart.update');
-   Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');
+
+   // Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
+   // Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
+
+   Route::put('/cart/update/{rowId}', [CartController::class, 'update_cart_quantity'])->name('cart.qty.update');
+
+
    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
 

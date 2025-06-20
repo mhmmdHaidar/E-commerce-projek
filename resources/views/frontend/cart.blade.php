@@ -67,10 +67,26 @@
                                         </td>
                                         <td>
                                             <div class="qty-control position-relative">
-                                                <input type="number" name="quantity" value="{{ $item->qty }}"
-                                                    min="1" class="qty-control__number text-center">
-                                                <div class="qty-control__reduce">-</div>
-                                                <div class="qty-control__increase">+</div>
+
+
+                                                <form action="{{ route('cart.qty.update', ['rowId' => $item->rowId]) }}"
+                                                    method="POST" class="d-flex align-items-center gap-2">
+                                                    @csrf
+                                                    @method('PUT')
+
+                                                    <button type="submit" name="action" value="decrease"
+                                                        class="btn btn-outline-secondary px-2 py-1">-</button>
+
+                                                    <input type="number" name="quantity" value="{{ $item->qty }}"
+                                                        min="1" class="form-control text-center" style="width: 60px;"
+                                                        readonly>
+
+                                                    <button type="submit" name="action" value="increase"
+                                                        class="btn btn-outline-secondary px-2 py-1">+</button>
+                                                </form>
+
+
+
                                             </div>
                                         </td>
                                         <td>
@@ -153,3 +169,17 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $(".qty_control_increase").on("click", function() {
+                $(this).closest('form').submit();
+            });
+
+            $(".qty_control_reduce").on("click", function() {
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
+@endpush
