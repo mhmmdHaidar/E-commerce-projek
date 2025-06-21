@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Brand;
-use App\Models\Category;
+use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -473,4 +474,9 @@ class AdminController extends Controller
 
     // Coupon methods end
 
+    public function order()
+    {
+        $orders = Order::orderBy('created_at', 'desc')->paginate(12);
+        return view('admin.v_orders.orders', compact('orders'));
+    }
 }

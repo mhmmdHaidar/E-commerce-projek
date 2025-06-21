@@ -40,18 +40,21 @@
                         </div>
 
                         @if ($address)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="my-account__address-list">
-                                        <div class="my-account__address-list-item">
-                                            <div class="my-account__address-list-item__detail">
-                                                <p>{{ $address->name }}</p>
-                                                <p>{{ $address->address }}</p>
-                                                <p>{{ $address->landmark }}</p>
-                                                <p>{{ $address->city }}, {{ $address->state }}, {{ $address->country }}</p>
-                                                <p>{{ $address->zip }}</p>
-                                                <br />
-                                                <p>{{ $address->phone }}</p>
+                            <div class="container mt-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="card shadow-sm">
+                                            <div class="card-header bg-primary text-white">
+                                                <h5 class="mb-0">Detail Pengiriman</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p><strong>Name:</strong> {{ $address->name }}</p>
+                                                <p><strong>Alamat:</strong> {{ $address->address }}</p>
+                                                <p><strong>Provinsi:</strong> {{ $address->landmark }}</p>
+                                                <p><strong>Kota/Kabupaten:</strong> {{ $address->city }}</p>
+                                                <p><strong>Kecamatan:</strong> {{ $address->state }}</p>
+                                                <p><strong>Kode pos:</strong> {{ $address->zip }}</p>
+                                                <p><strong>No telp:</strong> {{ $address->phone }}</p>
                                             </div>
                                         </div>
                                     </div>

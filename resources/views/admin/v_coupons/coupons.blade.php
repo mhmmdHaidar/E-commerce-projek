@@ -44,11 +44,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Code</th>
-                                    <th>Type</th>
-                                    <th>Value</th>
-                                    <th>Cart Value</th>
-                                    <th>Expiry Date</th>
+                                    <th>Kode Voucher</th>
+                                    <th>Tipe</th>
+                                    <th>Diskon</th>
+                                    <th>Minimum belanja</th>
+                                    <th>Tanggal Expired</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,8 +59,14 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $coupon->code }}</td>
                                         <td>{{ $coupon->type }}</td>
-                                        <td>{{ $coupon->value }}</td>
+                                        {{-- <td>{{ $coupon->value }}</td> --}}
+                                        @if ($coupon->type == 'percent')
+                                            <td>{{ $coupon->value }}%</td>
+                                        @else
+                                            <td>Rp. {{ number_format($coupon->value) }}</td>
+                                        @endif
                                         <td>Rp.{{ number_format($coupon->cart_value) }}</td>
+
                                         <td>{{ $coupon->expiry_date }}</td>
                                         <td>
                                             <div class="list-icon-function">
