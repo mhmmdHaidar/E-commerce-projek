@@ -12,10 +12,9 @@
                                 <tr>
                                     <th>Produk</th>
                                     <th></th>
-                                    <th>Harga</th>
-                                    <th>Qty</th>
-                                    <th>-----</th>
-                                    <th></th>
+                                    <th class="text-center">Harga</th>
+                                    <th class="text-center">Qty</th>
+                                    <th rowspan="2" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,27 +36,42 @@
                                             </ul> --}}
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <span
                                                 class="shopping-cart__product-price">Rp.{{ number_format($item->price) }}</span>
                                         </td>
-                                        <td>{{ $item->qty }}</td>
-                                        <td>
-                                            <form action="{{ route('wishlist.item.remove', ['rowId' => $item->rowId]) }}"
-                                                method="POST" id="remove-item-{{ $item->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:void(0)" class="remove-cart"
-                                                    onclick="document.getElementById('remove-item-{{ $item->id }}').submit();">
-                                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
-                                                        <path
-                                                            d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
-                                                    </svg>
-                                                </a>
-                                            </form>
+                                        <td class="text-center">{{ $item->qty }}</td>
+                                        <td class="text-center">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <form
+                                                        action="{{ route('wishlist.move.to.cart', ['rowId' => $item->rowId]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-warning">
+                                                            TAMBAH KE KERANJANG
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form
+                                                        action="{{ route('wishlist.item.remove', ['rowId' => $item->rowId]) }}"
+                                                        method="POST" id="remove-item-{{ $item->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:void(0)" class="remove-cart"
+                                                            onclick="document.getElementById('remove-item-{{ $item->id }}').submit();">
+                                                            <svg width="10" height="10" viewBox="0 0 10 10"
+                                                                fill="#767676" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
+                                                                <path
+                                                                    d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
+                                                            </svg>
+                                                        </a>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
