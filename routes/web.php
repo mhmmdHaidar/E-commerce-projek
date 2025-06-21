@@ -27,10 +27,12 @@ Route::middleware(['auth'])->group(function () {
    Route::put('/cart/update/{rowId}', [CartController::class, 'update_cart_quantity'])->name('cart.qty.update');
    Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
    Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
+
+   // Route Untuk whistlist
+   Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
+   Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 });
 
-// Route Untuk whistlist
-Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
 
 Route::middleware(['auth'])->group(function () {
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
