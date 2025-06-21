@@ -125,14 +125,26 @@
                             </tbody>
                         </table>
                         <div class="cart-table-footer">
-                            <form action="{{ route('cart.coupon.apply') }}" method="POST"
-                                class="position-relative bg-body">
-                                @csrf
-                                <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
-                                    value="@if (Session::has('coupon')) {{ Session::get('coupon')['code'] }} Applied! @else - @endif">
-                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                                    value="APPLY COUPON">
-                            </form>
+                            @if (!Session::has('coupon'))
+                                <form action="{{ route('cart.coupon.apply') }}" method="POST"
+                                    class="position-relative bg-body">
+                                    @csrf
+                                    <input class="form-control" type="text" name="coupon_code"
+                                        placeholder="Masukkan Kode voucher .." value="">
+                                    <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4"
+                                        type="submit" value="GUNAKAN VOUCHER">
+                                </form>
+                            @else
+                                <form action="{{ route('cart.coupon.remove') }}" method="POST"
+                                    class="position-relative bg-body">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
+                                        value="@if (Session::has('coupon')) {{ Session::get('coupon')['code'] }} Digunakan! @else - @endif">
+                                    <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4"
+                                        type="submit" value="HAPUS VOUCHER">
+                                </form>
+                            @endif
                             <form action="{{ route('cart.empty') }}" method="POST">
                                 @csrf
                                 @method('DELETE')
