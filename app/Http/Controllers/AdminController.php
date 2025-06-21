@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -404,4 +405,13 @@ class AdminController extends Controller
     }
 
     // Produks method end
+
+    // Coupon methods
+    public function coupons()
+    {
+        $coupons = Coupon::orderBy('expiry_date', 'desc')->paginate(12);
+        return view('admin.v_coupons.coupons', compact('coupons'));
+    }
+    // Coupon methods end
+
 }
