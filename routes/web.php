@@ -8,8 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-
-
+use App\Http\Controllers\WishlistController;
 
 Auth::routes();
 
@@ -26,10 +25,12 @@ Route::middleware(['auth'])->group(function () {
    // Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
 
    Route::put('/cart/update/{rowId}', [CartController::class, 'update_cart_quantity'])->name('cart.qty.update');
-
    Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
    Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 });
+
+// Route Untuk whistlist
+Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
 
 Route::middleware(['auth'])->group(function () {
    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
