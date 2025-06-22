@@ -233,7 +233,7 @@
                                 @endif
                             </div>
 
-                            <div class="checkout__payment-methods">
+                            {{-- <div class="checkout__payment-methods">
                                 <div class="form-check">
                                     <input class="form-check-input form-check-input_fill" type="radio" name="mode"
                                         id="mode1" value="card">
@@ -256,6 +256,48 @@
                                     </label>
                                 </div>
 
+                                <div class="policy-text">
+                                    Your personal data will be used to process your order, support your experience
+                                    throughout this
+                                    website, and for other purposes described in our <a href="terms.html"
+                                        target="_blank">privacy
+                                        policy</a>.
+                                </div>
+                            </div> --}}
+
+                            <div class="checkout__payment-methods">
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
+                                        id="mode1" value="card">
+                                    <label class="form-check-label" for="mode1">
+                                        Direct bank transfer
+                                        <div class="mb-3 option-detail">
+                                            <label for="brandSelect" class="form-label fw-bold">Pilih Bank</label>
+                                            <select class="form-select" name="" id="" required>
+                                                <option selected disabled>Choose Brand</option>
+                                                <option value="bca">BCA</option>
+                                                <option value="bni">BNI</option>
+                                                <option value="bri">BRI</option>
+                                                <option value="mandiri">Mandiri</option>
+                                            </select>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input form-check-input_fill" type="radio" name="mode"
+                                        id="mode3" value="cod">
+                                    <label class="form-check-label" for="mode3">
+                                        Cash on delivery
+                                        <p class="option-detail">
+                                            Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida
+                                            nec dui. Aenean
+                                            aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra
+                                            nunc, ut aliquet
+                                            magna posuere eget.
+                                        </p>
+                                    </label>
+                                </div>
                                 <div class="policy-text">
                                     Your personal data will be used to process your order, support your experience
                                     throughout this
