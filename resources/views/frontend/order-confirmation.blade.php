@@ -55,12 +55,36 @@
                     </div>
                     <div class="order-info__item">
                         <label>Paymetn Method</label>
-                        <span>{{ $order->transaction->mode }}</span>
+                        <span>
+                            @if ($order->transaction->mode == 'card')
+                                Transfer Bank
+                            @else
+                                {{ $order->transaction->mode }}
+                            @endif
+                        </span>
                     </div>
                 </div>
 
                 <div class="checkout__totals-wrapper">
                     <div class="checkout__totals">
+                        @if ($transaction && $transaction->mode === 'card' && $transaction->bankAccount)
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-8 text-center">
+                                    <div class="my-2">
+                                        <h3>Instruksi Pembayaran via Transfer Bank</h3>
+                                        <h3>Scan QR untuk Bayar</h3>
+                                    </div>
+
+                                    {!! QrCode::size(400)->generate('INI-COBA-QR-VERSI-2') !!}
+                                    <hr>
+                                    <h3>Atau transfer ke rekening berikut:</h3>
+                                    <h1>{{ $transaction->bankAccount->rekening }}</h1>
+                                    <div style="background-color: rgba(255, 251, 0, 0.63)" class="py-2 my-3">
+                                        <h2 style="color: rgb(78, 73, 73)">{{ $transaction->bankAccount->nama }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <h3>Order Details</h3>
                         <table class="checkout-cart-items">
                             <thead>

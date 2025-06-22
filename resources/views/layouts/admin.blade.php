@@ -148,6 +148,12 @@
                                         <div class="text">Coupns</div>
                                     </a>
                                 </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('admin.bank') }}" class="">
+                                        <div class="icon"><i class="icon-grid"></i></div>
+                                        <div class="text">Bank Account</div>
+                                    </a>
+                                </li>
 
                                 <li class="menu-item">
                                     <a href="users.html" class="">

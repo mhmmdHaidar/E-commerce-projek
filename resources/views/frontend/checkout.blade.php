@@ -49,7 +49,8 @@
                                             </div>
                                             <div class="card-body">
                                                 <p><strong>Name:</strong> {{ $address->name }}</p>
-                                                <p><strong>Alamat:</strong> {{ $address->address }}</p>
+                                                <p><strong>Alamat lengkap / No Rumah / Nama jln:</strong>
+                                                    {{ $address->address }}</p>
                                                 <p><strong>Provinsi:</strong> {{ $address->landmark }}</p>
                                                 <p><strong>Kota/Kabupaten:</strong> {{ $address->city }}</p>
                                                 <p><strong>Kecamatan:</strong> {{ $address->state }}</p>
@@ -66,7 +67,7 @@
                                     <div class="form-floating my-3">
                                         <input type="text" class="form-control" name="name" required=""
                                             value="{{ old('name') }}">
-                                        <label for="name">Full Name *</label>
+                                        <label for="name">Nama lengkap *</label>
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -76,7 +77,7 @@
                                     <div class="form-floating my-3">
                                         <input type="text" class="form-control" name="phone" required=""
                                             value="{{ old('phone') }}">
-                                        <label for="phone">Phone Number *</label>
+                                        <label for="phone">No telepon *</label>
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -86,7 +87,7 @@
                                     <div class="form-floating my-3">
                                         <input type="text" class="form-control" name="zip" required=""
                                             value="{{ old('zip') }}">
-                                        <label for="zip">Pincode *</label>
+                                        <label for="zip">Kode pos *</label>
                                         @error('zip')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -96,7 +97,7 @@
                                     <div class="form-floating mt-3 mb-3">
                                         <input type="text" class="form-control" name="state" required=""
                                             value="{{ old('state') }}">
-                                        <label for="state">State *</label>
+                                        <label for="state">Kecamatan *</label>
                                         @error('state')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -106,7 +107,7 @@
                                     <div class="form-floating my-3">
                                         <input type="text" class="form-control" name="city" required=""
                                             value="{{ old('city') }}">
-                                        <label for="city">Town / City *</label>
+                                        <label for="city">Kota / Kabupaten *</label>
                                         @error('city')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -116,7 +117,7 @@
                                     <div class="form-floating my-3">
                                         <input type="text" class="form-control" name="address" required=""
                                             value="{{ old('address') }}">
-                                        <label for="address">House no, Building Name *</label>
+                                        <label for="address">Alamat lengkap / No Rumah / Nama jln *</label>
                                         @error('address')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -124,24 +125,25 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating my-3">
-                                        <input type="text" class="form-control" name="locality" required=""
-                                            value="{{ old('locality') }}">
-                                        <label for="locality">Road Name, Area, Colony *</label>
-                                        @error('locality')
+                                        <input type="text" class="form-control" name="landmark" required=""
+                                            value="{{ old('name') }}">
+                                        <label for="landmark">Provinsi *</label>
+                                        @error('landmark')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating my-3">
-                                        <input type="text" class="form-control" name="landmark" required=""
-                                            value="{{ old('name') }}">
-                                        <label for="landmark">Landmark *</label>
-                                        @error('landmark')
+                                        <input type="text" class="form-control" name="locality" required=""
+                                            value="{{ old('locality') }}">
+                                        <label for="locality">Pesan *</label>
+                                        @error('locality')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
+
                             </div>
                         @endif
 
@@ -273,12 +275,13 @@
                                         Direct bank transfer
                                         <div class="mb-3 option-detail">
                                             <label for="brandSelect" class="form-label fw-bold">Pilih Bank</label>
-                                            <select class="form-select" name="" id="" required>
-                                                <option selected disabled>Choose Brand</option>
-                                                <option value="bca">BCA</option>
-                                                <option value="bni">BNI</option>
-                                                <option value="bri">BRI</option>
-                                                <option value="mandiri">Mandiri</option>
+                                            <select class="form-select" name="bank_account_id" id="" required>
+                                                <option value="">-- Pilih Bank --</option>
+                                                @foreach ($banks as $bank)
+                                                    <option value="{{ $bank->id }}">
+                                                        {{ $bank->BANK }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </label>

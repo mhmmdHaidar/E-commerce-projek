@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankAccount;
 use Carbon\Carbon;
 use App\Models\Brand;
 use App\Models\Order;
@@ -21,6 +22,7 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+
 
     // Brands methods
     public function brands()
@@ -475,6 +477,69 @@ class AdminController extends Controller
     }
 
     // Coupon methods end
+
+    // Bank account methods
+    public function bank()
+    {
+        $bank = BankAccount::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.v_bank.bank', compact('bank'));
+    }
+
+    public function bank_add()
+    {
+        return view('admin.v_bank.bank-add');
+    }
+
+    public function bank_store(Request $request)
+    {
+        $request->validate([
+            'BANK' => 'required',
+            'rekening' => 'required|numeric',
+            'nama' => 'required',
+        ]);
+
+        $bank = new BankAccount();
+        $bank->BANK = $request->BANK;
+        $bank->rekening = $request->rekening;
+        $bank->nama = $request->nama;
+        $bank->save();
+        return redirect()->route('admin.bank')->with('status', 'akun bank Berhasil di tambahkan');
+    }
+
+    public function bank_edit($id)
+    {
+        $bank = BankAccount::find($id);
+        return view('admin.v_bank.bank-edit', compact('bank'));
+    }
+
+    public function bank_update(Request $request)
+    {
+        $request->validate([
+            'BANK' => 'required',
+            'rekening' => 'required|numeric',
+            'nama' => 'required',
+        ]);
+
+        $bank = BankAccount::find($request->id);
+        $bank->BANK = $request->BANK;
+        $bank->rekening = $request->rekening;
+        $bank->nama = $request->nama;
+        $bank->save();
+        return redirect()->route('admin.bank')->with('status', 'akun bank Berhasil di edit');
+    }
+
+    public function bank_delete($id)
+    {
+        $bank = BankAccount::find($id);
+        $bank->delete();
+        return redirect()->route('admin.bank')->with('status', 'Akun Bank berhasil di hapus!');
+    }
+    // Bank account methodsend
+
+
+
+
+
 
     public function order()
     {

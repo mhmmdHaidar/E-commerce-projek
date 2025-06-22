@@ -10,4 +10,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function bankAccount()
+    {
+        return $this->belongsTo(BankAccount::class, 'bank_account_id');
+    }
 }

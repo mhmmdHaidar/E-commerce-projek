@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address;
 use Carbon\Carbon;
-use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Coupon;
+use App\Models\Address;
 use App\Models\OrderItem;
+use App\Models\BankAccount;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -128,7 +129,8 @@ class CartController extends Controller
         }
 
         $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
-        return view('frontend.checkout', compact('address'));
+        $banks = BankAccount::where('is_active', true)->get();
+        return view('frontend.checkout', compact('address', 'banks'));
     }
 
     public function place_an_order(Request $request)
@@ -140,7 +142,7 @@ class CartController extends Controller
             $request->validate([
                 'name' => 'required|max:100',
                 'phone' => 'required|numeric|digits:12',
-                'zip' => 'required|numeric|digits:6',
+                'zip' => 'required|numeric',
                 'state' => 'required',
                 'city' => 'required',
                 'address' => 'required',
@@ -192,7 +194,13 @@ class CartController extends Controller
         }
 
         if ($request->mode == "card") {
-            //
+            $transaction = new Transaction();
+            $transaction->user_id = $user_id;
+            $transaction->order_id = $order->id;
+            $transaction->mode = 'card'; // berarti transfer bank
+            $transaction->status = 'pending';
+            $transaction->bank_account_id = $request->bank_account_id; // Tambahkan ini
+            $transaction->save();
         } elseif ($request->mode == "paypal") {
             //
         } elseif ($request->mode == "cod") {
@@ -241,7 +249,9 @@ class CartController extends Controller
     {
         if (Session::has('order_id')) {
             $order = Order::find(Session::get('order_id'));
-            return view('frontend.order-confirmation', compact('order'));
+
+            $transaction = $order->transaction()->with('bankAccount')->first();
+            return view('frontend.order-confirmation', compact('order', 'transaction'));
         }
         return redirect()->route('cart.index');
     }

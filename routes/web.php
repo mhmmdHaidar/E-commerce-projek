@@ -92,4 +92,12 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    // Route untuk order
    Route::get('/admin/orders', [AdminController::class, 'order'])->name('admin.orders');
    Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
+
+   // Route untuk Bank Accounts
+   Route::get('/admin/banks', [AdminController::class, 'bank'])->name('admin.bank');
+   Route::get('/admin/bank/add', [AdminController::class, 'bank_add'])->name('admin.bank.add');
+   Route::post('/admin/bank/store', [AdminController::class, 'bank_store'])->name('admin.bank.store');
+   Route::get('/admin/bank/{id}/edit', [AdminController::class, 'bank_edit'])->name('admin.bank.edit');
+   Route::put('/admin/bank/update', [AdminController::class, 'bank_update'])->name('admin.bank.update');
+   Route::delete('/admin/bank/{id}/delete', [AdminController::class, 'bank_delete'])->name('admin.bank.delete');
 });
