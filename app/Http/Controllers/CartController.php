@@ -201,15 +201,15 @@ class CartController extends Controller
             $transaction->status = 'pending';
             $transaction->bank_account_id = $request->bank_account_id; // Tambahkan ini
             $transaction->save();
-        } elseif ($request->mode == "paypal") {
-            //
         } elseif ($request->mode == "cod") {
             $transaction = new Transaction();
             $transaction->user_id = $user_id;
             $transaction->order_id = $order->id;
-            $transaction->mode = $request->mode;
+            $transaction->mode = "cod";
             $transaction->status = "pending";
             $transaction->save();
+        } else {
+            //
         }
 
 
@@ -220,6 +220,7 @@ class CartController extends Controller
         Session::put('order_id', $order->id);
         return redirect()->route('cart.order.confirmation');
     }
+
 
     public function setAmountForCheckout()
     {

@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.app') @section('content')
     <style>
         .pt-90 {
             padding-top: 90px !important;
@@ -48,21 +47,20 @@
 
         .table-transaction>tbody>tr:nth-of-type(odd) {
             --bs-table-accent-bg: #fff !important;
-
         }
 
         .table-transaction th,
         .table-transaction td {
-            padding: 0.625rem 1.5rem .25rem !important;
+            padding: 0.625rem 1.5rem 0.25rem !important;
             color: #000 !important;
         }
 
         .table> :not(caption)>tr>th {
-            padding: 0.625rem 1.5rem .25rem !important;
+            padding: 0.625rem 1.5rem 0.25rem !important;
             background-color: #6a6e51 !important;
         }
 
-        .table-bordered>:not(caption)>*>* {
+        .table-bordered> :not(caption)>*>* {
             border-width: inherit;
             line-height: 32px;
             font-size: 14px;
@@ -97,14 +95,12 @@
             border-color: #6a6e51;
         }
     </style>
-    <main class="pt-90" style="padding-top: 0px;">
+    <main class="pt-90" style="padding-top: 0px">
         <div class="mb-4 pb-4"></div>
         <section class="my-account container">
             <h2 class="page-title">Order Details</h2>
             <div class="row">
-                <div class="col-lg-2">
-                    @include('user.account-nav')
-                </div>
+                <div class="col-lg-2">@include('user.account-nav')</div>
 
                 <div class="col-lg-10">
                     <div class="wg-box">
@@ -112,6 +108,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <h5>Ordered Details</h5>
+                                    {{-- <form action="{{ route('cart.bayar') }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-outline-dark">Bayar sekarang</button>
+                                    </form> --}}
+                                    <a href="{{ route('user.order.detail', ['order_id' => $order->id]) }}"
+                                        class="btn btn-dark">BAYAR
+                                        SEKARANG</a>
                                 </div>
                                 <div class="col-6 text-right">
                                     <a class="btn btn-sm btn-outline-dark" href="{{ route('user.orders') }}">Back</a>
@@ -119,7 +122,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table  table-bordered">
+                            <table class="table table-bordered">
                                 <tr>
                                     <th>Order No</th>
                                     <td>{{ $order->id }}</td>
@@ -162,7 +165,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Prouk</th>
                                         <th class="text-center">Price</th>
                                         <th class="text-center">Quantity</th>
                                         <th class="text-center">SKU</th>
@@ -174,26 +177,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($orderItems as $item)
                                         <tr>
                                             <td class="pname">
                                                 <div class="image">
                                                     <img src="{{ asset('uploads/products/thumbnails') }}/{{ $item->product->image }}"
-                                                        alt="{{ $item->product->name }}" class="image">
+                                                        alt="{{ $item->product->name }}" class="image" />
                                                 </div>
                                                 <div class="name">
                                                     <a href="{{ route('shop.product.details', ['product_slug' => $item->product->slug]) }}"
                                                         target="_blank" class="body-title-2">{{ $item->product->name }}</a>
                                                 </div>
                                             </td>
-                                            <td class="text-center">Rp. {{ number_format($item->price) }}</td>
-                                            <td class="text-center">{{ $item->quantity }}</td>
-                                            <td class="text-center">{{ $item->product->SKU }}</td>
-                                            <td class="text-center">{{ $item->product->category->name }}</td>
-                                            <td class="text-center">{{ $item->product->brand->name }}</td>
-                                            <td class="text-center">{{ $item->options }}</td>
-                                            <td class="text-center">{{ $item->rstatus == 0 ? 'NO' : 'YES' }}</td>
+                                            <td class="text-center">
+                                                Rp. {{ number_format($item->price) }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $item->quantity }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $item->product->SKU }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $item->product->category->name }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $item->product->brand->name }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $item->options }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $item->rstatus == 0 ? 'NO' : 'YES' }}
+                                            </td>
                                             <td class="text-center">
                                                 <div class="list-icon-function view-icon">
                                                     <div class="item eye">
@@ -203,7 +219,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -224,7 +239,7 @@
                                 <p>{{ $order->city }}, {{ $order->country }}</p>
                                 <p>{{ $order->landmark }}</p>
                                 <p>{{ $order->zip }}</p>
-                                <br>
+                                <br />
                                 <p>Mobile : {{ $order->phone }}</p>
                             </div>
                         </div>
@@ -236,11 +251,15 @@
                             <tbody>
                                 <tr>
                                     <th>Subtotal</th>
-                                    <td>Rp. {{ number_format($order->subtotal) }}</td>
+                                    <td>
+                                        Rp. {{ number_format($order->subtotal) }}
+                                    </td>
                                     <th>Tax</th>
                                     <td>Rp. {{ number_format($order->tax) }}</td>
                                     <th>Discount</th>
-                                    <td>Rp. {{ number_format($order->discount) }}</td>
+                                    <td>
+                                        Rp. {{ number_format($order->discount) }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Total</th>
@@ -264,7 +283,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>

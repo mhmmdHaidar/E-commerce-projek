@@ -49,13 +49,8 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 80px">OrderNo</th>
-                                        <th>Name</th>
-                                        <th class="text-center">Phone</th>
-                                        <th class="text-center">Subtotal</th>
-                                        <th class="text-center">Tax</th>
                                         <th class="text-center">Total</th>
-
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Metod bayar</th>
                                         <th class="text-center">Order Date</th>
                                         <th class="text-center">Items</th>
                                         <th class="text-center">Delivered On</th>
@@ -67,13 +62,14 @@
                                     @foreach ($orders as $order)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center">{{ $order->name }}</td>
-                                            <td class="text-center">{{ $order->phone }}</td>
-                                            <td class="text-center">Rp. {{ number_format($order->subtotal) }}</td>
-                                            <td class="text-center">Rp. {{ number_format($order->tax) }}</td>
                                             <td class="text-center">Rp. {{ number_format($order->total) }}</td>
-
-                                            <td class="text-center">{{ $order->status }}</td>
+                                            <td class="text-center">
+                                                @if ($order->transaction->mode == 'card')
+                                                    {{ $order->transaction->bankAccount->BANK }}
+                                                @else
+                                                    {{ $order->transaction->mode }}
+                                                @endif
+                                            </td>
                                             <td class="text-center">{{ $order->created_at }}</td>
                                             <td class="text-center">{{ $order->orderItems->count() }}</td>
                                             <td class="text-center">{{ $order->delivered_date }}</td>
