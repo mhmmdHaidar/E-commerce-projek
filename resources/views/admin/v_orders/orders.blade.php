@@ -62,7 +62,15 @@
                                         <td class="text-center">Rp. {{ number_format($order->tax) }}</td>
                                         <td class="text-center">Rp. {{ number_format($order->total) }}</td>
 
-                                        <td class="text-center">{{ $order->status }}</td>
+                                        <td class="text-center">
+                                            @if ($order->status == 'delivered')
+                                                <span class="badge bg-success">Delivered</span>
+                                            @elseif ($order->status == 'cenceled')
+                                                <span class="badge bg-danger">Cenceled</span>
+                                            @else
+                                                <span class="badge bg-warning">Ordered</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{ $order->created_at }}</td>
                                         <td class="text-center">{{ $order->orderItems->count() }}</td>
                                         <td class="text-center">{{ $order->delivered_date }}</td>

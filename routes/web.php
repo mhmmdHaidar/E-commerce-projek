@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
    Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
    Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
    Route::get('/account-order/{order_id}/confirmation', [UserController::class, 'detail_order'])->name('user.order.detail');
+   Route::put('/account-order/cencel-order', [UserController::class, 'order_cancel'])->name('user.order.cencel');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {

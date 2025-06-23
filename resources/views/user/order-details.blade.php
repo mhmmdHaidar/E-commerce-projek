@@ -112,9 +112,11 @@
                                         @csrf
                                         <button class="btn btn-outline-dark">Bayar sekarang</button>
                                     </form> --}}
-                                    <a href="{{ route('user.order.detail', ['order_id' => $order->id]) }}"
-                                        class="btn btn-dark">BAYAR
-                                        SEKARANG</a>
+                                    @if ($transaction->mode == 'card' && $order->status != 'canceled' && $transaction->status != 'approved')
+                                        <a href="{{ route('user.order.detail', ['order_id' => $order->id]) }}"
+                                            class="btn btn-dark">BAYAR
+                                            SEKARANG</a>
+                                    @endif
                                 </div>
                                 <div class="col-6 text-right">
                                     <a class="btn btn-sm btn-outline-dark" href="{{ route('user.orders') }}">Back</a>
@@ -122,6 +124,9 @@
                             </div>
                         </div>
                         <div class="table-responsive">
+                            @if (Session::has('status'))
+                                <p class="alert alert-success">{{ Session::get('status') }}</p>
+                            @endif
                             <table class="table table-bordered table-striped table-transaction">
                                 <tr>
                                     <th>Order No</th>
@@ -144,7 +149,7 @@
                                     <td colspan="5">
                                         @if ($order->status == 'delivered')
                                             <span class="badge bg-success">Delivered</span>
-                                        @elseif ($order->status == 'cenceled')
+                                        @elseif ($order->status == 'canceled')
                                             <span class="badge bg-danger">Cenceled</span>
                                         @else
                                             <span class="badge bg-warning">Ordered</span>
@@ -265,7 +270,13 @@
                                     <th>Total</th>
                                     <td>Rp. {{ number_format($order->total) }}</td>
                                     <th>Payment Mode</th>
-                                    <td>{{ $transaction->mode }}</td>
+                                    <td>
+                                        @if ($order->transaction->mode == 'card')
+                                            {{ $order->transaction->bankAccount->BANK }}
+                                        @else
+                                            {{ $order->transaction->mode }}
+                                        @endif
+                                    </td>
                                     <th>Status</th>
                                     <td>
                                         @if ($transaction->status == 'approved')
@@ -282,8 +293,41 @@
                             </tbody>
                         </table>
                     </div>
+
+                    @if ($order->status == 'ordered')
+                        <div class="wg-box mt-5 text-right">
+                            <form action="{{ route('user.order.cencel') }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <button type="button" class="btn btn-danger cancel-order">Cancel Order</button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $('.cancel-order').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title: "kamu yakin?",
+                    text: "Yakin ingin batal kan order ini?",
+                    type: "warning",
+                    buttons: ["No", "Yes"],
+                    confirmButtonColor: "#dc3545",
+                }).then(function(result) {
+                    if (result) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
