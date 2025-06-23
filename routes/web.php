@@ -93,6 +93,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    // Route untuk order
    Route::get('/admin/orders', [AdminController::class, 'order'])->name('admin.orders');
    Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
+   Route::put('/admin/order/update-status', [AdminController::class, 'update_order_status'])->name('admin.order.status.update');
 
    // Route untuk Bank Accounts
    Route::get('/admin/banks', [AdminController::class, 'bank'])->name('admin.bank');
