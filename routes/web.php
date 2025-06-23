@@ -103,4 +103,9 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    Route::get('/admin/bank/{id}/edit', [AdminController::class, 'bank_edit'])->name('admin.bank.edit');
    Route::put('/admin/bank/update', [AdminController::class, 'bank_update'])->name('admin.bank.update');
    Route::delete('/admin/bank/{id}/delete', [AdminController::class, 'bank_delete'])->name('admin.bank.delete');
+
+   // Route untuk slides
+   Route::get('/admin/slides', [AdminController::class, 'slides'])->name('admin.slides');
+   Route::get('/admin/slide-add', [AdminController::class, 'slide_add'])->name('admin.slide.add');
+   Route::post('/admin/slide/store', [AdminController::class, 'slide_store'])->name('admin.slide.store');
 });
