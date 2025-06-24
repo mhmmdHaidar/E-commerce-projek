@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\Address;
 use App\Models\OrderItem;
 use App\Models\Transaction;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,5 +48,63 @@ class UserController extends Controller
         $order->canceled_date = Carbon::now();
         $order->save();
         return back()->with('status', 'order berhasil di cencel !');
+    }
+
+    public function address()
+    {
+        $user = Auth::user();
+        $address = $user->addresses()->first(); // Ambil alamat pertama (bisa disesuaikan)
+        return view('user.account-address', compact('user', 'address'));
+    }
+
+    public function add_address()
+    {
+        return view('user.account-address-add');
+    }
+
+    public function storeAddress(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'zip' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'landmark' => 'required',
+            'address' => 'required',
+            'country' => 'required',
+            'locality' => 'required'
+        ]);
+
+        $data = $request->only([
+            'name',
+            'phone',
+            'zip',
+            'state',
+            'city',
+            'landmark',
+            'address',
+            'locality',
+            'country'
+        ]);
+        $data['user_id'] = $request->user()->id; // atau $request->user()->id
+        $data['isdefault'] = $request->has('isdefault') ? 1 : 0;
+
+        Address::create($data);
+
+        return redirect()->route('account.address')->with('success', 'Alamat berhasil disimpan.');
+    }
+
+    public function address_delete($id)
+    {
+        $address = Address::findOrFail($id);
+
+        if ($address->user_id != auth()->id()) {
+            abort(404, 'Unauthorized action.');
+        }
+
+        $address->delete();
+
+        return redirect()->route('account.address')->with('success', 'Alamat berhasil dihapus.');
     }
 }

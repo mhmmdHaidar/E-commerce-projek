@@ -16,7 +16,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product_slug}', [ShopController::class, 'product_details'])->name('shop.product.details');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
-Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('home.contact');
+Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('home.contact.store');
 
 // Route untuk keranjang belanja
 Route::middleware(['auth'])->group(function () {
@@ -56,6 +57,13 @@ Route::middleware(['auth'])->group(function () {
    Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
    Route::get('/account-order/{order_id}/confirmation', [UserController::class, 'detail_order'])->name('user.order.detail');
    Route::put('/account-order/cencel-order', [UserController::class, 'order_cancel'])->name('user.order.cencel');
+
+
+   // Route untuk axxount details
+   Route::get('/account-address', [UserController::class, 'address'])->name('account.address');
+   Route::get('/account-address/add', [UserController::class, 'add_address'])->name('account.address.add');
+   Route::post('/account-address/store', [UserController::class, 'storeAddress'])->name('account.address.store');
+   Route::delete('/account-address/{id}/delete', [UserController::class, 'address_delete'])->name('address.delete');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -113,4 +121,12 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    Route::get('/admin/slide/{id}/edit', [AdminController::class, 'slide_edit'])->name('admin.slide.edit');
    Route::put('/admin/slide/update', [AdminController::class, 'slide_update'])->name('admin.slide.update');
    Route::delete('/admin/slide/{id}/delete', [AdminController::class, 'slide_delete'])->name('admin.slide.delete');
+
+   // Route untuk contact
+   Route::get('/admin/contact', [AdminController::class, 'contacts'])->name('admin.contacts');
+   Route::delete('/admin/contact/{id}/delete', [AdminController::class, 'contact_celete'])->name('admin.contact.delete');
+
+   // Route Untuk User 
+   Route::get('/admin/user', [AdminController::class, 'admin_user'])->name('admin.users');
+   Route::get('/admin/users/{id}', [AdminController::class, 'user_show'])->name('admin.users.show');
 });

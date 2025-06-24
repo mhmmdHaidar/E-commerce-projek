@@ -11,7 +11,9 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\OrderItem;
 use App\Models\BankAccount;
+use App\Models\Contact;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -625,9 +627,6 @@ class AdminController extends Controller
     }
     // Order Methods end
 
-
-
-
     // Slider method
     public function slides()
     {
@@ -730,4 +729,31 @@ class AdminController extends Controller
         return redirect()->route('admin.slides')->with('status', 'Slide Berhasil di Hapus');
     }
     // Slider method end
+
+    // Contact method
+    public function contacts()
+    {
+        $contacts = Contact::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.v_contacts.contacts', compact('contacts'));
+    }
+
+    public function contact_delete($id)
+    {
+        $contact = Contact::find($id);
+        $contact->delete();
+        return redirect()->route('admin.contacts')->with('status', 'Pesan berhasil di hapus !');
+    }
+    // Contact method end
+
+    public function admin_user()
+    {
+        $users = User::withCount('orders')->where('utype', 'USR')->orderBy('created_at', 'desc')->paginate(12);
+        return view('admin.v_user.users', compact('users'));
+    }
+
+    public function user_show($id)
+    {
+        $user = User::with('orders')->findOrFail($id);
+        return view('admin.v_user.user-detail', compact('user'));
+    }
 }
