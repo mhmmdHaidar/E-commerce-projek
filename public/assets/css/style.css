@@ -8949,7 +8949,11 @@ h6,
 }
 
 .mark-grey-color {
-    -webkit-text-stroke-color: #c2c2c2;
+    -webkit-text-stroke-color: #80680b;
+}
+
+.font-mode{
+    font-family: "Bebas Neue", sans-serif;
 }
 
 .page-title {
