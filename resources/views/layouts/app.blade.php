@@ -18,6 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Allura&amp;display=swap" rel="stylesheet" />
+    @notifyCss
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
@@ -31,10 +32,14 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Fira+Code:wght@300..700&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
+
     @stack('styles')
+
+
 </head>
 
 <body class="gradient-bg">
+
     <svg class="d-none">
         <symbol id="icon_nav" viewBox="0 0 25 18">
             <rect width="25" height="2" />
@@ -321,23 +326,44 @@
                 </form>
             </div>
 
+            <style>
+                .nactive {
+                    border-bottom: 1px solid black !important;
+                }
+            </style>
             <div class="container">
+
                 <div class="overflow-hidden">
-                    <ul class="navigation__list list-unstyled position-relative">
+                    <ul class="navigation__list list-unstyled d-flex">
                         <li class="navigation__item">
-                            <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+                            <a href="{{ route('home.index') }}"
+                                class="navigation__link {{ request()->routeIs('home.index') ? 'active' : '' }}">
+                                Home
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
+                            <a href="{{ route('shop.index') }}"
+                                class="navigation__link {{ request()->routeIs('shop.index') ? 'nactive' : '' }}">
+                                Shop
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
+                            <a href="{{ route('cart.index') }}"
+                                class="navigation__link {{ request()->routeIs('cart.index') ? 'nactive' : '' }}">
+                                Cart
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('home.about') }}" class="navigation__link">About</a>
+                            <a href="{{ route('home.about') }}"
+                                class="navigation__link {{ request()->routeIs('home.about') ? 'nactive' : '' }}">
+                                About
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
+                            <a href="{{ route('home.contact') }}"
+                                class="navigation__link {{ request()->routeIs('home.contact') ? 'nactive' : '' }}">
+                                Contact
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -412,22 +438,41 @@
                 <nav class="navigation">
                     <ul class="navigation__list list-unstyled d-flex">
                         <li class="navigation__item">
-                            <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+                            <a href="{{ route('home.index') }}"
+                                class="navigation__link {{ request()->routeIs('home.index') ? 'active' : '' }}">
+                                Home
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
+                            <a href="{{ route('shop.index') }}"
+                                class="navigation__link {{ request()->routeIs('shop.index') ? 'nactive' : '' }}">
+                                Shop
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
+                            <a href="{{ route('cart.index') }}"
+                                class="navigation__link {{ request()->routeIs('cart.index') ? 'nactive' : '' }}">
+                                Cart
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('home.about') }}" class="navigation__link">About</a>
+                            <a href="{{ route('home.about') }}"
+                                class="navigation__link {{ request()->routeIs('home.about') ? 'nactive' : '' }}">
+                                About
+                            </a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
+                            <a href="{{ route('home.contact') }}"
+                                class="navigation__link {{ request()->routeIs('home.contact') ? 'nactive' : '' }}">
+                                Contact
+                            </a>
                         </li>
                     </ul>
                 </nav>
+
+                <div class="alert-not" style="position: sticky; z-index: 99999999; top: 4; right: 3;">
+                    @include('notify::components.notify')
+                </div>
 
                 <div class="header-tools d-flex align-items-center">
                     <div class="header-tools__item hover-container">
@@ -756,7 +801,10 @@
     <script src="{{ asset('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+
+
     @stack('scripts')
+    @notifyJs
 </body>
 
 </html>

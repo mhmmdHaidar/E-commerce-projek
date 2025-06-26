@@ -22,18 +22,22 @@ class WishlistController extends Controller
             $request->quantity,
             $request->price,
         )->associate('App\Models\Product');
+
+        notify()->success('Berhasil memasukkan produk ke wishlist!');
         return redirect()->back();
     }
 
     public function remove_item($rowId)
     {
         Cart::instance('wishlist')->remove($rowId);
+
         return redirect()->back();
     }
 
     public function empty_wishlist()
     {
         Cart::instance('wishlist')->destroy();
+        notify()->success('Berhasil hapus wishlist!');
         return redirect()->back();
     }
 
@@ -47,6 +51,9 @@ class WishlistController extends Controller
             $item->qty,
             $item->price
         )->associate('App\Models\Product');
+
+        notify()->success('Berhasil memasukkan produk ke keranjang!');
+
         return redirect()->back();
     }
 }

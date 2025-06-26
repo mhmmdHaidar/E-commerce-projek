@@ -59,11 +59,16 @@ Route::middleware(['auth'])->group(function () {
    Route::put('/account-order/cencel-order', [UserController::class, 'order_cancel'])->name('user.order.cencel');
 
 
-   // Route untuk axxount details
+   // Route untuk address
    Route::get('/account-address', [UserController::class, 'address'])->name('account.address');
    Route::get('/account-address/add', [UserController::class, 'add_address'])->name('account.address.add');
    Route::post('/account-address/store', [UserController::class, 'storeAddress'])->name('account.address.store');
+   Route::get('/account/address/edit/{id}', [UserController::class, 'edit_address'])->name('account.address.edit');
+   Route::put('/account/address/update/{id}', [UserController::class, 'update_address'])->name('account.address.update');
    Route::delete('/account-address/{id}/delete', [UserController::class, 'address_delete'])->name('address.delete');
+
+   // Route untuk akun account details
+   Route::get('/account-detail', [UserController::class, 'account_detail'])->name('account.detail');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {

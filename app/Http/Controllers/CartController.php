@@ -31,6 +31,8 @@ class CartController extends Controller
             $request->quantity,
             $request->price,
         )->associate('App\Models\Product');
+
+        notify()->success('Berhasil memasukkan produk ke keranjang!');
         return redirect()->back();
     }
 
@@ -59,6 +61,7 @@ class CartController extends Controller
     public function empty_cart()
     {
         Cart::instance('cart')->destroy();
+        notify()->success('Berhasil hapus keranjang!');
         return redirect()->back();
     }
 
@@ -128,7 +131,7 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
+        $address = Address::where('user_id', auth()->id())->where('isdefault', 1)->first();
         $banks = BankAccount::where('is_active', true)->get();
         return view('frontend.checkout', compact('address', 'banks'));
     }
@@ -159,7 +162,6 @@ class CartController extends Controller
             $address->address = $request->address;
             $address->locality = $request->locality;
             $address->landmark = $request->landmark;
-            $address->country = 'Indonesia';
             $address->user_id = $user_id;
             $address->isdefault = true;
             $address->save();
@@ -179,8 +181,8 @@ class CartController extends Controller
         $order->address = $address->address;
         $order->city = $address->city;
         $order->state = $address->state;
-        $order->country = $address->country;
         $order->landmark = $address->landmark;
+        $order->country = $address->country ?? 'Indonesia';
         $order->zip = $address->zip;
         $order->save();
 
@@ -218,6 +220,7 @@ class CartController extends Controller
         Session::forget('coupon');
         Session::forget('discounts');
         Session::put('order_id', $order->id);
+        notify()->success('Order Berhasil !');
         return redirect()->route('cart.order.confirmation');
     }
 

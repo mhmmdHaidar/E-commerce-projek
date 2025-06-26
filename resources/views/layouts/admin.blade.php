@@ -49,12 +49,18 @@
                             <i class="icon-menu-left"></i>
                         </div>
                     </div>
+                    {{-- <style>
+                        .adactive {
+                            background-color: rgb(205, 204, 255) !important;
+                        }
+                    </style> --}}
                     <div class="center">
                         <div class="center-item">
                             <div class="center-heading">Main Home</div>
                             <ul class="menu-list">
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.index') }}" class="">
+                                    <a href="{{ route('admin.index') }}"
+                                        class="{{ request()->routeIs('admin.index') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-grid"></i></div>
                                         <div class="text">Dashboard</div>
                                     </a>
@@ -70,12 +76,14 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.product.add') }}" class="">
+                                            <a href="{{ route('admin.product.add') }}"
+                                                class="{{ request()->routeIs('admin.product.add') ? 'adactive' : '' }}">
                                                 <div class="text">Add Product</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.products') }}" class="">
+                                            <a href="{{ route('admin.products') }}"
+                                                class="{{ request()->routeIs('admin.products') ? 'adactive' : '' }}">
                                                 <div class="text">Products</div>
                                             </a>
                                         </li>
@@ -88,12 +96,14 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.brand.add') }}" class="">
+                                            <a href="{{ route('admin.brand.add') }}"
+                                                class="{{ request()->routeIs('admin.brand.add') ? 'adactive' : '' }}">
                                                 <div class="text">New Brand</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.brands') }}" class="">
+                                            <a href="{{ route('admin.brands') }}"
+                                                class="{{ request()->routeIs('admin.brands') ? 'adactive' : '' }}">
                                                 <div class="text">Brands</div>
                                             </a>
                                         </li>
@@ -106,12 +116,14 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.category.add') }}" class="">
+                                            <a href="{{ route('admin.category.add') }}"
+                                                class="{{ request()->routeIs('admin.category.add') ? 'adactive' : '' }}">
                                                 <div class="text">New Category</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.categories') }}" class="">
+                                            <a href="{{ route('admin.categories') }}"
+                                                class="{{ request()->routeIs('dmin.categories') ? 'adactive' : '' }}">
                                                 <div class="text">Categories</div>
                                             </a>
                                         </li>
@@ -125,52 +137,54 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="{{ route('admin.orders') }}" class="">
+                                            <a href="{{ route('admin.orders') }}"
+                                                class="{{ request()->routeIs('admin.orders') ? 'adactive' : '' }}">
                                                 <div class="text">Orders</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="order-tracking.html" class="">
-                                                <div class="text">Order tracking</div>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.slides') }}" class="">
+                                    <a href="{{ route('admin.slides') }}"
+                                        class="{{ request()->routeIs('admin.slides') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-image"></i></div>
                                         <div class="text">Slider</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.coupons') }}" class="">
+                                    <a href="{{ route('admin.coupons') }}"
+                                        class="{{ request()->routeIs('admin.coupons') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-grid"></i></div>
                                         <div class="text">Coupns</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.bank') }}" class="">
+                                    <a href="{{ route('admin.bank') }}"
+                                        class="{{ request()->routeIs('admin.bank') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-grid"></i></div>
                                         <div class="text">Bank Account</div>
                                     </a>
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.contacts') }}" class="">
+                                    <a href="{{ route('admin.contacts') }}"
+                                        class="{{ request()->routeIs('admin.contacts') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-mail"></i></div>
                                         <div class="text">Message</div>
                                     </a>
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.users') }}" class="">
+                                    <a href="{{ route('admin.users') }}"
+                                        class="{{ request()->routeIs('admin.users') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-user"></i></div>
                                         <div class="text">User</div>
                                     </a>
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="settings.html" class="">
+                                    <a href="settings.html"
+                                        class="{{ request()->routeIs('account.address') ? 'adactive' : '' }}">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>

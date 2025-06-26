@@ -85,7 +85,14 @@
                                         <p><strong>Alamat:</strong> {{ $order->address }}, {{ $order->city }},
                                             {{ $order->state }} - {{ $order->zip }}</p>
                                         <p><strong>Status:</strong>
-                                            <span class="badge bg-success">{{ ucfirst($order->status) }}</span>
+                                            {{-- {{ ucfirst($order->status) }} --}}
+                                            @if ($order->status == 'delivered')
+                                                <span class="badge bg-success">Delivered</span>
+                                            @elseif ($order->status == 'canceled')
+                                                <span class="badge bg-danger">Cenceled</span>
+                                            @else
+                                                <span class="badge bg-warning">Ordered</span>
+                                            @endif
                                         </p>
                                         <p><strong>Tanggal Order:</strong> {{ $order->created_at->format('d M Y') }}</p>
                                     </div>

@@ -76,6 +76,7 @@ class UserController extends Controller
             'locality' => 'required'
         ]);
 
+
         $data = $request->only([
             'name',
             'phone',
@@ -95,6 +96,60 @@ class UserController extends Controller
         return redirect()->route('account.address')->with('success', 'Alamat berhasil disimpan.');
     }
 
+    // Tampilkan form edit alamat
+    public function edit_address($id)
+    {
+        $address = Address::findOrFail($id);
+
+        if ($address->user_id != auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('user.account-address-edit', compact('address'));
+    }
+
+    // Simpan perubahan alamat
+    public function update_address(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'zip' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'landmark' => 'required',
+            'address' => 'required',
+            'country' => 'required',
+            'locality' => 'required',
+        ]);
+
+        $address = Address::findOrFail($id);
+
+        if ($address->user_id != auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = $request->only([
+            'name',
+            'phone',
+            'zip',
+            'state',
+            'city',
+            'landmark',
+            'address',
+            'locality',
+            'country'
+        ]);
+
+        $data['isdefault'] = $request->has('isdefault') ? 1 : 0;
+
+        $address->update($data);
+
+        notify()->success('Alamat berhasi di perbaharui!');
+        return redirect()->route('account.address')->with('success', 'Alamat berhasil diperbarui.');
+    }
+
+
     public function address_delete($id)
     {
         $address = Address::findOrFail($id);
@@ -106,5 +161,10 @@ class UserController extends Controller
         $address->delete();
 
         return redirect()->route('account.address')->with('success', 'Alamat berhasil dihapus.');
+    }
+
+    public function account_detail()
+    {
+        return view('user.account-detail');
     }
 }

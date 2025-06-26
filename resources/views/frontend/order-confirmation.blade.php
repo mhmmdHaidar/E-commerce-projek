@@ -73,9 +73,10 @@
                                     <div class="my-2">
                                         <h3>Instruksi Pembayaran via Transfer Bank</h3>
                                         <h3>Scan QR untuk Bayar</h3>
+                                        {{ QrCode::size(550)->generate('INI-COBA-QR-VERSI-2') }}
                                     </div>
 
-                                    {!! QrCode::size(400)->generate('INI-COBA-QR-VERSI-2') !!}
+
                                     <hr>
                                     <h3>Atau transfer ke rekening berikut:</h3>
                                     <h1>{{ $transaction->bankAccount->rekening }}</h1>
