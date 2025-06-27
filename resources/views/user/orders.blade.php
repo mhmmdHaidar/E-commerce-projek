@@ -49,9 +49,11 @@
                                     <th class="text-center">Total</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Metod bayar</th>
-                                    <th class="text-center">Order Date</th>
+                                    <th class="text-center">
+                                        Tanggal Pemesanan
+                                    </th>
                                     <th class="text-center">Items</th>
-                                    <th class="text-center">Delivered On</th>
+                                    <th class="text-center">Di kirim</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -67,15 +69,15 @@
                                     <td class="text-center">
                                         @if ($order->status == 'delivered')
                                         <span class="badge bg-success"
-                                            >Delivered</span
+                                            >Di kirim</span
                                         >
                                         @elseif ($order->status == 'canceled')
                                         <span class="badge bg-danger"
-                                            >Cenceled</span
+                                            >Di Batalkan</span
                                         >
                                         @else
                                         <span class="badge bg-warning"
-                                            >Ordered</span
+                                            >Di pesan</span
                                         >
                                         @endif
                                     </td>

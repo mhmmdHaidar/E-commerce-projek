@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function () {
 
    // Route untuk akun account details
    Route::get('/account-detail', [UserController::class, 'account_detail'])->name('account.detail');
+   Route::post('/account-detail/update', [UserController::class, 'update_account'])
+      ->name('account.update');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {

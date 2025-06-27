@@ -16,25 +16,25 @@
         <a
             href="{{ route('user.orders') }}"
             class="menu-link menu-link_us-s {{ request()->routeIs('user.orders') ? 'anactive' : '' }}"
-            >Orders</a
+            >Pesanan</a
         >
     </li>
     <li>
         <a
             href="{{ route('account.address') }}"
             class="menu-link menu-link_us-s {{ request()->routeIs('account.address') ? 'anactive' : '' }}"
-            >Addresses</a
+            >Alamat</a
         >
     </li>
     <li>
         <a
             href="{{ route('account.detail') }}"
             class="menu-link menu-link_us-s {{ request()->routeIs('account.detail') ? 'anactive' : '' }}"
-            >Account Details</a
+            >Detail Akun</a
         >
     </li>
     <li>
-        <a href="account-wishlist.html" class="menu-link menu-link_us-s"
+        <a href="{{ route('wishlist.index') }}" class="menu-link menu-link_us-s"
             >Wishlist</a
         >
     </li>

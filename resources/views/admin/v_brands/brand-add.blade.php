@@ -38,7 +38,7 @@
                 @csrf
                 <fieldset class="name">
                     <div class="body-title">
-                        Brand Name <span class="tf-color-1">*</span>
+                        Nama Brand <span class="tf-color-1">*</span>
                     </div>
                     <input
                         class="flex-grow"
@@ -58,7 +58,7 @@
                 @enderror
                 <fieldset class="name">
                     <div class="body-title">
-                        Brand Slug <span class="tf-color-1">*</span>
+                        Brand slug <span class="tf-color-1">*</span>
                     </div>
                     <input
                         class="flex-grow"

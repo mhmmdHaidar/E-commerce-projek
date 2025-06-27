@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Address;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        $user = Auth::user();
+        return view('user.index', compact('user'));
     }
 
     public function orders()
@@ -165,6 +168,38 @@ class UserController extends Controller
 
     public function account_detail()
     {
-        return view('user.account-detail');
+        $user = Auth::user();
+        return view('user.account-detail', compact('user'));
+    }
+
+    public function update_account(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'mobile' => 'nullable|string|max:20',
+            'old_password' => 'nullable|string',
+            'new_password' => 'nullable|string|confirmed',
+        ]);
+
+        // update profile data
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+
+        // jika user mengisi password
+        if ($request->filled('old_password') || $request->filled('new_password')) {
+            if (!Hash::check($request->old_password, $user->password)) {
+                return redirect()->back()->withErrors(['old_password' => 'Old password is incorrect.']);
+            }
+            $user->password = Hash::make($request->new_password);
+        }
+
+        $user->save();
+
+        notify()->success('Berhasil Update akun !');
+        return redirect()->route('account.detail');
     }
 }

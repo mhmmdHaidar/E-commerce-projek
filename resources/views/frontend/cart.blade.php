@@ -18,22 +18,22 @@
             <a href="javascript:void(0)" class="checkout-steps__item active">
                 <span class="checkout-steps__item-number">01</span>
                 <span class="checkout-steps__item-title">
-                    <span>Shopping Bag</span>
-                    <em>Manage Your Items List</em>
+                    <span>Keranjang Belanja</span>
+                    <em>Kelola Daftar Barang Anda</em>
                 </span>
             </a>
             <a href="javascript:void(0)" class="checkout-steps__item">
                 <span class="checkout-steps__item-number">02</span>
                 <span class="checkout-steps__item-title">
-                    <span>Shipping and Checkout</span>
-                    <em>Checkout Your Items List</em>
+                    <span>Pengiriman dan Pembayaran</span>
+                    <em>Periksa Daftar Barang Anda</em>
                 </span>
             </a>
             <a href="javascript:void(0)" class="checkout-steps__item">
                 <span class="checkout-steps__item-number">03</span>
                 <span class="checkout-steps__item-title">
-                    <span>Confirmation</span>
-                    <em>Review And Submit Your Order</em>
+                    <span>Konfirmasi</span>
+                    <em>Tinjau dan Kirim Pesanan Anda</em>
                 </span>
             </a>
         </div>
@@ -43,11 +43,11 @@
                 <table class="cart-table">
                     <thead>
                         <tr>
-                            <th>Product</th>
+                            <th>Produk</th>
                             <th></th>
-                            <th>Price</th>
+                            <th>Harga</th>
                             <th>Quantity</th>
-                            <th>Subtotal</th>
+                            <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -72,12 +72,6 @@
                                     class="shopping-cart__product-item__detail"
                                 >
                                     <h4>{{ $item->name }}</h4>
-                                    <ul
-                                        class="shopping-cart__product-item__options"
-                                    >
-                                        <li>Color: Yellow</li>
-                                        <li>Size: L</li>
-                                    </ul>
                                 </div>
                             </td>
                             <td>
