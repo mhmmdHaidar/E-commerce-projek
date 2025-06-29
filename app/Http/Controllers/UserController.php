@@ -182,12 +182,21 @@ class UserController extends Controller
             'mobile' => 'nullable|string|max:20',
             'old_password' => 'nullable|string',
             'new_password' => 'nullable|string|confirmed',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // update profile data
         $user->name = $request->name;
         $user->email = $request->email;
         $user->mobile = $request->mobile;
+
+        // 👇 handle upload gambar profil
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/avatars'), $filename);
+            $user->avatar = 'uploads/avatars/' . $filename;
+        }
 
         // jika user mengisi password
         if ($request->filled('old_password') || $request->filled('new_password')) {

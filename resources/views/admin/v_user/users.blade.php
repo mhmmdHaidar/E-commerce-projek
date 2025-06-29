@@ -54,7 +54,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td class="pname">
                                             <div class="image">
-                                                <img src="user-1.html" alt="" class="image">
+                                                <img src="{{ asset($user->avatar ?? 'uploads/avatars/default.png') }}"
+                                                    alt="" class="rounded-circle"
+                                                    style="object-fit: cover; aspect-ratio: 1 / 1;">
                                             </div>
                                             <div class="name">
                                                 <a href="#" class="body-title-2">{{ $user->name }}</a>

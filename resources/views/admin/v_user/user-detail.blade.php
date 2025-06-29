@@ -36,8 +36,9 @@
                     <div class="col-md-4">
                         <div class="card shadow-sm rounded">
                             <div class="card-body text-center">
-                                <img src="{{ asset($user->profile_photo ?? 'default-avatar.png') }}"
-                                    class="rounded-circle mb-3" width="120" height="120" alt="Profile Picture">
+                                <img src="{{ asset($user->avatar ?? 'uploads/avatars/default.png') }}"
+                                    class="rounded-circle" width="300" height="300" alt="Profile Picture"
+                                    style="object-fit: cover; aspect-ratio: 1 / 1;">
                                 <h5 class="card-title">{{ $user->name }}</h5>
 
                             </div>

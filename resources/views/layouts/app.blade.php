@@ -580,14 +580,28 @@
                         <div class="header-tools__item hover-container">
                             <a href="{{ Auth::user()->utype === 'ADM' ? route('admin.index') : route('user.index') }}"
                                 class="header-tools__item">
-                                <span class="pr-6px">
-                                    <h4 class="text-dark">{{ Auth::user()->name }}</h3>
+                                <span class="">
+                                    <h6 class="text-dark">{{ Auth::user()->name }}</h3>
                                 </span>
-                                {{-- <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_user" />
-                                </svg> --}}
                             </a>
+                        </div>
+
+                        {{-- <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <use href="#icon_user" />
+                        </svg> --}}
+
+                        <div class="nav-item dropdown ms-0">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href=""
+                                id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset(Auth::user()->avatar ?? 'uploads/avatars/default.png') }}"
+                                    alt="Avatar" class="rounded-circle" width="38" height="38"
+                                    style="object-fit: cover; aspect-ratio: 1 / 1;">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('account.detail') }}">Profil Saya</a>
+                                </li>
+                            </ul>
                         </div>
                     @endguest
                 </div>
@@ -785,6 +799,8 @@
                     <span>Shop</span>
                 </a>
             </div>
+
+
 
             <div class="col-4">
                 <a href="{{ route('home.index') }}"
