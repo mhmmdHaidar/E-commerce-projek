@@ -130,6 +130,9 @@
                                     </ul>
                                 </li>
 
+
+
+
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
@@ -181,14 +184,30 @@
                                         <div class="text">User</div>
                                     </a>
                                 </li>
-
-                                <li class="menu-item">
-                                    <a href="settings.html"
-                                        class="{{ request()->routeIs('account.address') ? 'adactive' : '' }}">
-                                        <div class="icon"><i class="icon-settings"></i></div>
-                                        <div class="text">Settings</div>
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-layers"></i></div>
+                                        <div class="text">Laporan</div>
                                     </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('laporan.order.form') }}" class="">
+                                                <div class="text">Order</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('laporan.user.form') }}" class="">
+                                                <div class="text">User</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('laporan.produk.form') }}" class="">
+                                                <div class="text">Produk</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
+
 
                                 <li class="menu-item">
                                     <form action="{{ route('logout') }}" method="POST" id="logout-form">

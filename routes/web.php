@@ -9,6 +9,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AdminReportController;
 
 Auth::routes();
 
@@ -136,4 +137,14 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
    // Route Untuk User 
    Route::get('/admin/user', [AdminController::class, 'admin_user'])->name('admin.users');
    Route::get('/admin/users/{id}', [AdminController::class, 'user_show'])->name('admin.users.show');
+
+   // Route untuk Laporan
+   Route::get('/laporan/order', [AdminReportController::class, 'orderForm'])->name('laporan.order.form');
+   Route::post('/laporan/order/export', [AdminReportController::class, 'exportOrder'])->name('laporan.order.export');
+
+   Route::get('/laporan/user', [AdminReportController::class, 'userForm'])->name('laporan.user.form');
+   Route::post('/laporan/user/export', [AdminReportController::class, 'exportUser'])->name('laporan.user.export');
+
+   Route::get('/laporan/produk', [AdminReportController::class, 'produkForm'])->name('laporan.produk.form');
+   Route::post('/laporan/produk/export', [AdminReportController::class, 'exportProduk'])->name('laporan.produk.export');
 });
