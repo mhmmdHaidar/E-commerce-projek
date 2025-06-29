@@ -48,4 +48,14 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'pesan telah terkirim');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $result = Product::select('id', 'name', 'slug', 'image')
+            ->where('name', 'LIKE', "%{$query}%")
+            ->take(8)
+            ->get();
+        return response()->json($result);
+    }
 }
